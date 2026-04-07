@@ -25,6 +25,18 @@ export const EXAMS: Exam[] = [
     imageUrl: 'https://storage.googleapis.com/dala-prod-public-storage/generated-images/071263d0-2320-438d-bf6e-9e7a16dc9f76/sat-exam-prep-99a47471-1775552325144.webp'
   },
   {
+    id: 'act',
+    title: 'ACT Success Prep',
+    category: 'International',
+    durationMinutes: 175,
+    totalQuestions: 215,
+    description: 'Comprehensive ACT simulation covering English, Mathematics, Reading, and Science.',
+    sections: ['English', 'Math', 'Reading', 'Science'],
+    subjects: ['English', 'Math', 'Science'],
+    popularity: 88,
+    imageUrl: 'https://storage.googleapis.com/dala-prod-public-storage/generated-images/071263d0-2320-438d-bf6e-9e7a16dc9f76/act-prep-banner-67a332d3-1775553491870.webp'
+  },
+  {
     id: 'ielts',
     title: 'IELTS Academic Prep',
     category: 'International',
@@ -121,7 +133,7 @@ export const EXAMS: Exam[] = [
     durationMinutes: 110,
     totalQuestions: 45,
     description: 'Official German proficiency prep for Goethe and TestDaF certifications.',
-    sections: ['Hören', 'Lesen', 'Schreiben', 'Sprechen'],
+    sections: ['H\u00f6ren', 'Lesen', 'Schreiben', 'Sprechen'],
     subjects: ['German'],
     popularity: 85,
     imageUrl: 'https://storage.googleapis.com/dala-prod-public-storage/generated-images/071263d0-2320-438d-bf6e-9e7a16dc9f76/german-language-module-449beada-1775553052945.webp'
@@ -194,9 +206,9 @@ export const MOCK_QUESTIONS: Record<string, Question[]> = {
       subject: 'Mathematics',
       topic: 'Logarithms',
       text: `Find the value of x if log<sub>2</sub>(x + 2) + log<sub>2</sub>(x - 2) = 5.`,
-      options: ['6', '\u00b16', '4', '8'],
+      options: ['6', '±6', '4', '8'],
       correct: 0,
-      explanation: `Using log properties: log(a) + log(b) = log(ab). So log<sub>2</sub>(x\u00b2 - 4) = 5. x\u00b2 - 4 = 2\u2075 = 32. x\u00b2 = 36. x = 6 (since x > 2).`,
+      explanation: `Using log properties: log(a) + log(b) = log(ab). So log<sub>2</sub>(x² - 4) = 5. x² - 4 = 2⁵ = 32. x² = 36. x = 6 (since x > 2).`,
       type: 'multiple-choice'
     },
     {
@@ -219,6 +231,18 @@ export const MOCK_QUESTIONS: Record<string, Question[]> = {
       options: ['0', '6', '12', '18'],
       correct: 0,
       explanation: `3x + 6 = 12 => 3x = 6. Therefore, 3x - 6 = 6 - 6 = 0.`,
+      type: 'multiple-choice'
+    }
+  ],
+  act: [
+    {
+      id: 1,
+      subject: 'English',
+      topic: 'Punctuation',
+      text: `Which of the following is correctly punctuated?`,
+      options: ['The cat, sat on the mat.', 'The cat sat, on the mat.', 'The cat sat on the mat.', 'The cat sat on, the mat.'],
+      correct: 2,
+      explanation: `No comma is needed in this simple sentence.`,
       type: 'multiple-choice'
     }
   ],

@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { 
-  Users, Upload, Download, FileText, Monitor, 
-  BarChart3, Settings, Shield, Plus, Search, Filter,
-  MoreVertical, CheckCircle2, Clock, Languages, Globe2, BookOpenCheck,
+  Users, Upload, Monitor, 
+  BarChart3, Shield, Search, Filter,
+  MoreVertical, CheckCircle2, Languages, Globe2, BookOpenCheck,
   Award, TrendingUp, Sparkles, Zap
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 
 const TeacherDashboard = () => {
@@ -128,7 +127,7 @@ const TeacherDashboard = () => {
                                    <div className="flex items-center gap-4">
                                       <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-black text-blue-900 text-xs shadow-inner">{stu.name.charAt(0)}</div>
                                       <div>
-                                         <p className="font-black text-slate-900 text-sm">{stu.name}</p>\
+                                         <p className="font-black text-slate-900 text-sm">{stu.name}</p>
                                          <p className="text-[10px] font-bold text-slate-400">{stu.id}</p>
                                       </div>
                                    </div>
@@ -204,8 +203,11 @@ const TeacherDashboard = () => {
                     </div>
                     <h3 className="text-xl font-black tracking-tight">Staff Training</h3>
                  </div>
-                 <p className="text-sm font-bold text-slate-400 mb-8 leading-relaxed relative z-10">Enable specialized language modules for corporate staff development and assessment.</p>\
-                 <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-2xl relative z-10 shadow-xl shadow-blue-900/40 transition-all active:scale-95">
+                 <p className="text-sm font-bold text-slate-400 mb-8 leading-relaxed relative z-10">Enable specialized language modules for corporate staff development and assessment.</p>
+                 <button 
+                  onClick={() => toast.success("Corporate language program setup initiated.")}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 rounded-2xl relative z-10 shadow-xl shadow-blue-900/40 transition-all active:scale-95"
+                 >
                     Setup Program
                  </button>
               </div>

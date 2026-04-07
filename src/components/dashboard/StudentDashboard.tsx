@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
-  Play, TrendingUp, Award, Clock, Search, 
-  MapPin, BookOpen, ChevronRight, Filter, Star,
-  Languages, GraduationCap, Flame, Sparkles, Target, Zap,
-  BarChart, Globe, Info
+  Play, TrendingUp, Award, Search, 
+  Languages, Flame, Sparkles, Target, 
+  BarChart, Globe, ChevronRight, BookOpen, Star
 } from "lucide-react";
 import { EXAMS } from "@/lib/mockData";
 import { useExamStore } from "@/store/examStore";
@@ -17,12 +16,11 @@ interface StudentDashboardProps {
 }
 
 const StudentDashboard = ({ onStartExam }: StudentDashboardProps) => {
-  const { user } = useExamStore();
-  const [activeTab, setActiveTab] = useState<'Nigeria' | 'International' | 'Language'>('Nigeria');
+  const { user, activeDashboardTab, setDashboardTab } = useExamStore();
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredExams = EXAMS.filter(e => 
-    e.category === activeTab && 
+    e.category === activeDashboardTab && 
     e.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -89,9 +87,9 @@ const StudentDashboard = ({ onStartExam }: StudentDashboardProps) => {
               {['Nigeria', 'International', 'Language'].map((tab: any) => (
                 <button
                   key={tab}
-                  onClick={() => setActiveTab(tab)}
+                  onClick={() => setDashboardTab(tab)}
                   className={`flex-1 lg:flex-none px-8 py-3 rounded-xl font-black text-sm whitespace-nowrap transition-all ${
-                    activeTab === tab ? "bg-white text-blue-900 shadow-xl" : "text-slate-500 hover:text-slate-900"
+                    activeDashboardTab === tab ? "bg-white text-blue-900 shadow-xl" : "text-slate-500 hover:text-slate-900"
                   }`}
                 >
                   {tab === 'Language' ? 'Language Academy' : `${tab} Exams`}
@@ -103,7 +101,7 @@ const StudentDashboard = ({ onStartExam }: StudentDashboardProps) => {
               <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
               <input 
                 type="text"
-                placeholder={`Search ${activeTab.toLowerCase()} modules...`}
+                placeholder={`Search ${activeDashboardTab.toLowerCase()} modules...`}
                 className="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 border-2 border-slate-50 focus:border-blue-600 focus:bg-white transition-all font-bold text-slate-900 outline-none"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -113,14 +111,14 @@ const StudentDashboard = ({ onStartExam }: StudentDashboardProps) => {
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeTab}
+              key={activeDashboardTab}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
               className="grid md:grid-cols-2 xl:grid-cols-3 gap-8"
             >
-              {activeTab === 'Language' && user?.languageProgress.map((prog) => (
+              {activeDashboardTab === 'Language' && user?.languageProgress.map((prog) => (
                 <LanguageProgressCard key={prog.languageId} progress={prog} onResume={() => onStartExam(prog.languageId)} />
               ))}
               
@@ -130,10 +128,10 @@ const StudentDashboard = ({ onStartExam }: StudentDashboardProps) => {
             </motion.div>
           </AnimatePresence>
 
-          {filteredExams.length === 0 && (activeTab !== 'Language' || (user?.languageProgress.length === 0 && activeTab === 'Language')) && (
+          {filteredExams.length === 0 && (activeDashboardTab !== 'Language' || (user?.languageProgress.length === 0 && activeDashboardTab === 'Language')) && (
             <div className="text-center py-20 bg-slate-50 rounded-[3rem] border-2 border-dashed border-slate-200">
                <Search className="w-16 h-16 text-slate-300 mx-auto mb-6" />
-               <p className="text-xl font-black text-slate-400 uppercase tracking-widest">No modules found matching your search</p>\
+               <p className="text-xl font-black text-slate-400 uppercase tracking-widest">No modules found matching your search</p>
                <Button variant="link" className="mt-4 text-blue-600 font-black" onClick={() => setSearchQuery('')}>Clear Search</Button>
             </div>
           )}
@@ -141,7 +139,7 @@ const StudentDashboard = ({ onStartExam }: StudentDashboardProps) => {
       </div>
 
       {/* Language Learning Skills Breakdown */}
-      {activeTab === 'Language' && user?.languageProgress && user.languageProgress.length > 0 && (
+      {activeDashboardTab === 'Language' && user?.languageProgress && user.languageProgress.length > 0 && (
         <div className="max-w-7xl mx-auto px-6 mt-16">
           <div className="flex items-center gap-4 mb-10">
             <Languages className="w-8 h-8 text-blue-600" />

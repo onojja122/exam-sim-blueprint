@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Check, ShieldCheck, Zap, Globe, Building2, Crown, School, Briefcase, GraduationCap, Languages, Star, Sparkles } from "lucide-react";
+import { Check, Zap, Building2, Crown, Languages, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useExamStore } from "@/store/examStore";
 
@@ -46,7 +46,7 @@ const tiers = [
     name: "Corporate Enterprise",
     price: "Custom",
     description: "Scalable testing and language solutions for schools and organizations.",
-    features: ["Unlimited Student Nodes", "Advanced Admin Controls", "Custom Exam Creation", "API & LMS Integration", "Dedicated Account Manager"],
+    features: ["Unlimited Student Nodes", "Advanced Admin Controls", "Custom Exam Creation", "API & LMS Integration", "Dedicated Account Manager", "Staff Language Training"],
     cta: "Contact Sales",
     icon: <Building2 className="w-6 h-6" />,
     color: "slate"

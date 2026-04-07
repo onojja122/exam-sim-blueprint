@@ -5,6 +5,7 @@ interface ExamState {
   currentView: 'home' | 'dashboard' | 'teacher' | 'profile' | 'exam' | 'analytics' | 'payment';
   selectedExamId: string | null;
   user: User | null;
+  activeDashboardTab: 'Nigeria' | 'International' | 'Language';
   
   // Actions
   setView: (view: 'home' | 'dashboard' | 'teacher' | 'profile' | 'exam' | 'analytics' | 'payment') => void;
@@ -12,6 +13,7 @@ interface ExamState {
   setUser: (user: User) => void;
   addAttempt: (attempt: Attempt) => void;
   updateLanguageProgress: (progress: LanguageProgress) => void;
+  setDashboardTab: (tab: 'Nigeria' | 'International' | 'Language') => void;
 }
 
 const MOCK_USER: User = {
@@ -82,10 +84,12 @@ export const useExamStore = create<ExamState>((set) => ({
   currentView: 'home',
   selectedExamId: null,
   user: MOCK_USER,
+  activeDashboardTab: 'Nigeria',
   
   setView: (view) => set({ currentView: view }),
   selectExam: (id) => set({ selectedExamId: id, currentView: 'exam' }),
   setUser: (user) => set({ user }),
+  setDashboardTab: (tab) => set({ activeDashboardTab: tab }),
   addAttempt: (attempt) => set((state) => ({
     user: state.user ? {
       ...state.user,

@@ -8,6 +8,7 @@ export interface Question {
   explanation: string;
   audioUrl?: string;
   type?: 'multiple-choice' | 'speaking' | 'writing' | 'listening' | 'vocabulary' | 'grammar';
+  level?: string;
 }
 
 export interface Exam {

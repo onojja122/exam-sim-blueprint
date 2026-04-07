@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Clock, CheckCircle, ChevronLeft, ChevronRight, 
-  Flag, Calculator, Settings, X, Shield, LayoutGrid, 
-  Info, Lock as LockIcon, Brain, Mic, Volume2, Languages,
-  PenTool, BookOpen, MessageSquare, Headphones, Award, Sparkles
+  Flag, Settings, X, Shield, LayoutGrid, 
+  Brain, Mic, Volume2, 
+  PenTool, Headphones, Award, Sparkles, BookOpenCheck
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
@@ -149,7 +149,7 @@ const ExamEngine = ({ examId, onFinish, onCancel }: ExamEngineProps) => {
           <div className="flex items-center gap-4">
              <div className="w-12 h-12 bg-blue-700 rounded-2xl flex items-center justify-center font-black text-xl shadow-lg shadow-blue-500/20">POG</div>
              <div className="hidden lg:block border-l border-slate-700 pl-6">
-               <div className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-500 leading-none mb-1">Paul Onoja Global Academy\u2122</div>
+               <div className="text-[10px] font-black uppercase tracking-[0.3em] text-amber-500 leading-none mb-1">Paul Onoja Global Academy™</div>
                <div className="text-base font-black uppercase tracking-widest text-white leading-none">{currentExam?.title}</div>
              </div>
           </div>
@@ -211,6 +211,8 @@ const ExamEngine = ({ examId, onFinish, onCancel }: ExamEngineProps) => {
                       {currentQuestion.type === 'speaking' ? 'Speaking Practice' : 
                        currentQuestion.type === 'writing' ? 'Writing Task' : 
                        currentQuestion.type === 'listening' ? 'Listening Lab' : 
+                       currentQuestion.type === 'vocabulary' ? 'Vocabulary Builder' :
+                       currentQuestion.type === 'grammar' ? 'Grammar Lesson' :
                        'Knowledge Check'}
                     </Badge>
                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Difficulty: {isLanguageModule ? 'Adaptive Proficiency' : 'Standard'}</span>
@@ -432,6 +434,7 @@ const ExamEngine = ({ examId, onFinish, onCancel }: ExamEngineProps) => {
                       {q.type === 'speaking' ? <Mic className="w-4 h-4" /> : 
                        q.type === 'writing' ? <PenTool className="w-4 h-4" /> : 
                        q.type === 'listening' ? <Headphones className="w-4 h-4" /> : 
+                       q.type === 'vocabulary' ? <BookOpenCheck className="w-4 h-4" /> :
                        <span className="text-xl font-black">{i + 1}</span>}
                     </button>
                   ))}
@@ -465,7 +468,7 @@ const ExamEngine = ({ examId, onFinish, onCancel }: ExamEngineProps) => {
                     className="w-full h-20 font-black border-2 border-slate-200 hover:bg-red-50 hover:text-red-600 hover:border-red-100 rounded-[2rem] transition-all text-lg"
                     onClick={onCancel}
                   >
-                    <LockIcon className="w-6 h-6 mr-3" />
+                    <X className="w-6 h-6 mr-3" />
                     EXIT SESSION
                   </Button>
                 </div>
